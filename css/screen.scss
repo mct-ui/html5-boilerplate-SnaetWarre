@@ -104,6 +104,7 @@ $breakpoints: (
   bp3: calc(993 / 16 * 1em),
   bp4: calc(1201 / 16 * 1em),
   bp5: calc(1401 / 16 * 1em),
+  bp6: calc(1601 / 16 * 1em),
 ) !default;
 
 // ---
@@ -183,6 +184,19 @@ h1 {
   font-weight: 700;
   margin-bottom: $space-m;
   line-height: calc($baseline * 5);
+
+  @include mq(bp1) {
+    font-size: $ms9;
+    line-height: calc($baseline * 6);
+  }
+
+  @include mq(bp2) {
+    font-size: $ms11;
+    line-height: calc($baseline * 8);
+  }
+
+  
+  
 }
 
 h2 {
@@ -265,7 +279,25 @@ a:active {
 */
 
 .o-row {
+  padding: $space-m $space-m 0; 
+  display: flow-root; // om margin collapsing te voorkomen
+
+  &--primairy {
+    background-color: $color-primary;
+  }
+
+  &--dark {
+    background-color: $color-text;
+    color: white;
+  }
+
+  &--l {
+    @include mq(bp2) {
+      padding: $space-l $space-l $space-m;
+    }
+  }
 }
+
 
 /*
     Objects: Container
@@ -274,6 +306,10 @@ a:active {
 */
 
 .o-container {
+  //margin: 0 auto;
+  max-width: $container-max-width;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*
