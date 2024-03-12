@@ -17,6 +17,7 @@
 }
 
 * {
+  padding: 0;
   margin: 0;
   font-size: 100%;
   font-weight: normal;
@@ -37,10 +38,9 @@ img {
 */
 html {
   font-size: 100%;
-  font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
   line-height: 1.5;
+  font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
   color: #212529;
-  background-color: white;
   scroll-behavior: smooth;
 }
 
@@ -48,11 +48,11 @@ html {
     Customize the background color and color to match your design.
 */
 ::-moz-selection {
-  background-color: #4c6ef5;
+  background: #5c7cfa;
   color: white;
 }
 ::selection {
-  background-color: #4c6ef5;
+  background: #5c7cfa;
   color: white;
 }
 
@@ -64,8 +64,8 @@ html {
 h1 {
   font-size: 1.8020324707rem;
   font-weight: 700;
+  line-height: 2rem;
   margin-bottom: 1.5rem;
-  line-height: 2.5rem;
 }
 @media (min-width: 36.0625em) {
   h1 {
@@ -81,22 +81,25 @@ h1 {
 }
 
 h2 {
-  font-size: 1.423828125rem;
   font-weight: 700;
+  font-size: 1.423828125rem;
+  line-height: 1.5rem;
   margin-bottom: 1.5rem;
-  line-height: 2rem;
 }
 
 h3 {
-  font-size: 1.125rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
   line-height: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 h4,
 h5,
 h6 {
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -112,22 +115,41 @@ figure {
 
 ul,
 ol {
-  margin-bottom: 1.5rem;
+  margin-left: 1.5rem;
+}
+
+li ul,
+li ol {
+  margin-bottom: 0;
 }
 
 blockquote {
+  font-style: italic;
+  font-size: 1.423828125rem;
+  line-height: 2rem;
   margin-bottom: 1.5rem;
 }
 
 figcaption {
-  margin-bottom: 1.5rem;
+  font-size: 0.8888888889rem;
+  line-height: 1rem;
+  margin-top: 0.5rem;
+  color: #868e96;
 }
 
 hr {
+  border: 0;
+  height: 1px;
+  background: #dee2e6;
   margin-bottom: 1.5rem;
 }
 
 a {
+  color: #4c6ef5;
+  transition: all 0.1s ease-in-out;
+}
+
+a:visited {
   color: #4c6ef5;
 }
 
@@ -135,12 +157,8 @@ a:hover {
   color: #5c7cfa;
 }
 
-a:visited {
-  color: #4c6ef5;
-}
-
 a:active {
-  color: #5c7cfa;
+  color: #4263eb;
 }
 
 /*---------------------------------------/*
@@ -155,16 +173,19 @@ a:active {
   padding: 1.5rem 1.5rem 0;
   display: flow-root;
 }
-.o-row--primairy {
-  background-color: #4c6ef5;
+
+.o-row--primary {
+  background: #748ffc;
 }
-.o-row--dark {
+
+.o-row--grey-dark {
   background-color: #212529;
   color: white;
 }
+
 @media (min-width: 48.0625em) {
   .o-row--l {
-    padding: 2rem 2rem 1.5rem;
+    padding: 3rem 3rem 1.5rem;
   }
 }
 
@@ -174,16 +195,12 @@ a:active {
     Creates a horizontal container that sets de global max-width
 */
 .o-container {
-  max-width: 87.5rem;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
+  max-width: 75rem;
 }
 
-/*
-    Objects: Layout
-    ---
-    Creates a Layout with flexbox
-*/
 /*
     Objects: Layout
     ---
@@ -202,11 +219,33 @@ a:active {
 
 /* gutter modifiers, these affect o-layout__item too */
 .o-layout--gutter {
-  margin: 0 -1.5rem;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
 }
 
 .o-layout--gutter > .o-layout__item {
-  padding: 0 1.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.o-layout--gutter-s {
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+
+.o-layout--gutter-s > .o-layout__item {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.o-layout--gutter-l {
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.o-layout--gutter-l > .o-layout__item {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* reverse horizontal row modifier */
@@ -277,9 +316,14 @@ a:active {
   align-content: space-between;
 }
 
-/*---------------------------------------/*
- # COMPONENTS
-/*---------------------------------------*/
+/*------------------------------------*\
+  #COMPONENTS
+\*------------------------------------*/
+/*
+    Component: Component name
+    ---
+    Component description
+*/
 /*
     Component: layout block
     ---
@@ -301,6 +345,23 @@ a:active {
 /*---------------------------------------/*
  # UTILITIES
 /*---------------------------------------*/
+/*
+    Utilities: Max widths
+    ---
+    max-width utility classes
+*/
+.u-max-width-s {
+  max-width: 37.5rem;
+}
+
+.u-max-width-m {
+  max-width: 60rem;
+}
+
+.u-max-width-l {
+  max-width: 87.5rem;
+}
+
 /*
     Utilities: Widths
     ---
@@ -697,68 +758,6 @@ a:active {
     flex-basis: 83.3333333333% !important;
   }
   .u-6-of-6-bp5 {
-    flex-basis: 100% !important;
-  }
-}
-@media (min-width: 100.0625em) {
-  .u-1-of-2-bp6 {
-    flex-basis: 50% !important;
-  }
-  .u-2-of-2-bp6 {
-    flex-basis: 100% !important;
-  }
-  .u-1-of-3-bp6 {
-    flex-basis: 33.3333333333% !important;
-  }
-  .u-2-of-3-bp6 {
-    flex-basis: 66.6666666667% !important;
-  }
-  .u-3-of-3-bp6 {
-    flex-basis: 100% !important;
-  }
-  .u-1-of-4-bp6 {
-    flex-basis: 25% !important;
-  }
-  .u-2-of-4-bp6 {
-    flex-basis: 50% !important;
-  }
-  .u-3-of-4-bp6 {
-    flex-basis: 75% !important;
-  }
-  .u-4-of-4-bp6 {
-    flex-basis: 100% !important;
-  }
-  .u-1-of-5-bp6 {
-    flex-basis: 20% !important;
-  }
-  .u-2-of-5-bp6 {
-    flex-basis: 40% !important;
-  }
-  .u-3-of-5-bp6 {
-    flex-basis: 60% !important;
-  }
-  .u-4-of-5-bp6 {
-    flex-basis: 80% !important;
-  }
-  .u-5-of-5-bp6 {
-    flex-basis: 100% !important;
-  }
-  .u-1-of-6-bp6 {
-    flex-basis: 16.6666666667% !important;
-  }
-  .u-2-of-6-bp6 {
-    flex-basis: 33.3333333333% !important;
-  }
-  .u-3-of-6-bp6 {
-    flex-basis: 50% !important;
-  }
-  .u-4-of-6-bp6 {
-    flex-basis: 66.6666666667% !important;
-  }
-  .u-5-of-6-bp6 {
-    flex-basis: 83.3333333333% !important;
-  }
-  .u-6-of-6-bp6 {
     flex-basis: 100% !important;
   }
 }/*# sourceMappingURL=screen.css.map */

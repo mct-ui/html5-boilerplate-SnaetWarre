@@ -95,7 +95,7 @@ $space-xxl: calc($space-l * 2); // 64px
 $space-xxxl: calc($space-xl * 2); // 96px
 
 // ---
-// Settings: Breakpoints
+// Breakpoints
 // ---
 
 $breakpoints: (
@@ -104,14 +104,13 @@ $breakpoints: (
   bp3: calc(993 / 16 * 1em),
   bp4: calc(1201 / 16 * 1em),
   bp5: calc(1401 / 16 * 1em),
-  bp6: calc(1601 / 16 * 1em),
 ) !default;
 
 // ---
 // Grid
 // ---
 
-$container-max-width: calc(1400 / $root-font-size * 1rem);
+$container-max-width: calc(1200 / $root-font-size * 1rem);
 
 // The gutter between columns
 $grid-gutter: $space-m;
@@ -128,21 +127,21 @@ $columns: (2, 3, 4, 5, 6) !default;
 *,
 *:before,
 *:after {
+  // Reset box-sizing
   box-sizing: border-box;
 }
 
 * {
-  // Reset margin and font-size and font-weight
+  // Reset margin and font-size
+  padding: 0;
   margin: 0;
   font-size: 100%;
   font-weight: normal;
 }
 
 img {
-  // make images block level elements
-  display: block;
-  // make images responsive
-  max-width: 100%;
+  display: block; // make images block level elements
+  max-width: 100%; // make images responsive
 }
 
 /*---------------------------------------/*
@@ -156,12 +155,11 @@ img {
 */
 
 html {
-  font-size: calc($root-font-size/16 * 100%);
-  font-family: $font-family-primary;
-  line-height: 1.5;
-  color: $color-text;
-  background-color: white;
-  scroll-behavior: smooth;
+  font-size: calc($root-font-size / 16 * 100%);
+  line-height: 1.5; // 24px
+  font-family: $font-family-primary; // global font-family
+  color: $color-text; // global text color
+  scroll-behavior: smooth; // smooth scrolling
 }
 
 /*
@@ -169,8 +167,8 @@ html {
 */
 
 ::selection {
-  background-color: $color-primary;
-  color: white;
+  background: $color-primary-light; // background color
+  color: white; // text color
 }
 
 /*
@@ -182,8 +180,8 @@ html {
 h1 {
   font-size: $ms5;
   font-weight: 700;
+  line-height: calc($baseline * 4);
   margin-bottom: $space-m;
-  line-height: calc($baseline * 5);
 
   @include mq(bp1) {
     font-size: $ms9;
@@ -194,28 +192,28 @@ h1 {
     font-size: $ms11;
     line-height: calc($baseline * 8);
   }
-
-  
-  
 }
 
 h2 {
-  font-size: $ms3;
   font-weight: 700;
+  font-size: $ms3;
+  line-height: calc($baseline * 3);
   margin-bottom: $space-m;
-  line-height: calc($baseline * 4);
 }
 
 h3 {
-  font-size: $ms1;
   font-weight: 700;
-  margin-bottom: $space-m;
+  font-size: $ms1;
   line-height: calc($baseline * 3);
+  margin-bottom: $space-m;
 }
 
 h4,
 h5,
 h6 {
+  font-weight: 700;
+  font-size: $ms0;
+  line-height: calc($baseline * 3);
   margin-bottom: $space-m;
 }
 
@@ -231,41 +229,50 @@ figure {
 
 ul,
 ol {
-  margin-bottom: $space-m;
+  margin-left: $space-m;
 }
 
-// li ul,
-// li ol {
-// }
+li ul,
+li ol {
+  margin-bottom: 0;
+}
 
 blockquote {
+  font-style: italic;
+  font-size: $ms3;
+  line-height: calc($baseline * 4);
   margin-bottom: $space-m;
 }
 
 figcaption {
-  margin-bottom: $space-m;
+  font-size: $ms-1;
+  line-height: calc($baseline * 2);
+  margin-top: $space-xs;
+  color: $color-text-lighter;
 }
 
 hr {
+  border: 0;
+  height: 1px;
+  background: $color-border;
   margin-bottom: $space-m;
 }
 
 a {
   color: $color-primary;
-  
-}
-
-a:hover {
-  color: $color-primary-light;
-  
+  transition: all 0.1s ease-in-out;
 }
 
 a:visited {
   color: $color-primary;
 }
 
+a:hover {
+  color: $color-primary-light;
+}
+
 a:active {
-  color: $color-primary-light
+  color: $color-primary-dark;
 }
 
 /*---------------------------------------/*
@@ -279,25 +286,24 @@ a:active {
 */
 
 .o-row {
-  padding: $space-m $space-m 0; 
-  display: flow-root; // om margin collapsing te voorkomen
-
-  &--primairy {
-    background-color: $color-primary;
-  }
-
-  &--dark {
-    background-color: $color-text;
-    color: white;
-  }
-
-  &--l {
-    @include mq(bp2) {
-      padding: $space-l $space-l $space-m;
-    }
-  }
+  padding: $space-m $space-m 0;
+  display: flow-root;
 }
 
+.o-row--primary {
+  background: $color-primary-lighter;
+}
+
+.o-row--grey-dark {
+  background-color: $color-text;
+  color: white;
+}
+
+.o-row--l {
+  @include mq(bp2) {
+    padding: $space-xl $space-xl $space-m;
+  }
+}
 
 /*
     Objects: Container
@@ -306,17 +312,11 @@ a:active {
 */
 
 .o-container {
-  //margin: 0 auto;
-  max-width: $container-max-width;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
+  max-width: $container-max-width;
 }
-
-/*
-    Objects: Layout
-    ---
-    Creates a Layout with flexbox
-*/
 
 /*
     Objects: Layout
@@ -338,11 +338,33 @@ a:active {
 /* gutter modifiers, these affect o-layout__item too */
 
 .o-layout--gutter {
-  margin: 0 calc($grid-gutter * -1);
+  margin-left: calc($grid-gutter / -2);
+  margin-right: calc($grid-gutter / -2);
 }
 
 .o-layout--gutter > .o-layout__item {
-  padding: 0 $grid-gutter;
+  padding-left: calc($grid-gutter / 2);
+  padding-right: calc($grid-gutter / 2);
+}
+
+.o-layout--gutter-s {
+  margin-left: calc($grid-gutter-s / -2);
+  margin-right: calc($grid-gutter-s / -2);
+}
+
+.o-layout--gutter-s > .o-layout__item {
+  padding-left: calc($grid-gutter-s / 2);
+  padding-right: calc($grid-gutter-s / 2);
+}
+
+.o-layout--gutter-l {
+  margin-left: calc($grid-gutter-l / -2);
+  margin-right: calc($grid-gutter-l / -2);
+}
+
+.o-layout--gutter-l > .o-layout__item {
+  padding-left: calc($grid-gutter-l / 2);
+  padding-right: calc($grid-gutter-l / 2);
 }
 
 /* reverse horizontal row modifier */
@@ -417,9 +439,15 @@ a:active {
   align-content: space-between;
 }
 
-/*---------------------------------------/*
- # COMPONENTS
-/*---------------------------------------*/
+/*------------------------------------*\
+  #COMPONENTS
+\*------------------------------------*/
+
+/*
+    Component: Component name
+    ---
+    Component description
+*/
 
 /*
     Component: layout block
@@ -443,6 +471,24 @@ a:active {
 /*---------------------------------------/*
  # UTILITIES
 /*---------------------------------------*/
+
+/*
+    Utilities: Max widths
+    ---
+    max-width utility classes
+*/
+
+.u-max-width-s {
+  max-width: calc(600 / 16 * 1rem);
+}
+
+.u-max-width-m {
+  max-width: calc(960 / 16 * 1rem);
+}
+
+.u-max-width-l {
+  max-width: calc(1400 / 16 * 1rem);
+}
 
 /*
     Utilities: Widths
